@@ -30,15 +30,17 @@ TS_default_height = 300
 '''
 get filenames from working folder
 '''
-def get_h5_filenames( inclusions, exclusions ):
+def get_h5_filenames( folder, inclusions, exclusions ):
 
   h5_files = []
 
-  cwd_files = [ filename for filename in os.listdir( os.getcwd() ) \
-              if os.path.isfile(filename) ]
-  cwd_files = sorted( cwd_files )
-  
-  for filename in cwd_files:
+  fld_files = []
+  for root, dir, files in os.walk( folder ):
+      for file in files:
+        fld_files.append( os.path.join( root, file ) )
+  fld_files = sorted( fld_files )
+
+  for filename in fld_files:
     ext = os.path.splitext( filename )[1]
 
     if ext in ['.h5']:
@@ -109,7 +111,8 @@ class ValData:
     Pdrive_Mean = []
     Pgrid_Mean = []
 
-    h5_files = get_h5_filenames( ['OPERA_PP_'], [] )
+    folder = os.path.join( os.getcwd(), 'data' )
+    h5_files = get_h5_filenames( folder, ['OPERA_PP_'], [] )
 
     fcount = 0
     ncount = len(h5_files)
@@ -117,7 +120,7 @@ class ValData:
     for filename in h5_files:
 
       fcount += 1
-      if fcount % 10 == 0:
+      if fcount % 50 == 0:
         print( "Reading file %i of %i" % ( fcount, ncount ) )     
 
       hf = h5py.File( filename, 'r')
@@ -229,7 +232,8 @@ class ValData:
     Q = []
     damper = []
   
-    h5_files = get_h5_filenames( ['OPERA_PP_'], [] )
+    folder = os.path.join( os.getcwd(), 'data' )
+    h5_files = get_h5_filenames( folder, ['OPERA_PP_'], [] )
 
     counter = 0
 
