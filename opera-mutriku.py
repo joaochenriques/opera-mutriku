@@ -83,7 +83,7 @@ class ValData:
   #~============================================================================
   def select_all_button( self ):
     self.button_widget = Button( label = 'Select all rows', 
-                                 button_type='success' )
+                                 button_type='success', width=150 )
     self.button_widget.on_click( self.select_all_callback )
     return self.button_widget
 
