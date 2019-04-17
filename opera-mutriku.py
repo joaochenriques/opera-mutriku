@@ -114,6 +114,10 @@ class ValData:
     folder = os.path.join( os.getcwd(), 'data' )
     h5_files = get_h5_filenames( folder, ['OPERA_PP_'], [] )
 
+    if len( h5_files ) == 0:
+      print( "Data files not found!")
+      exit(1)
+
     fcount = 0
     ncount = len(h5_files)
 
@@ -234,6 +238,10 @@ class ValData:
   
     folder = os.path.join( os.getcwd(), 'data' )
     h5_files = get_h5_filenames( folder, ['OPERA_PP_'], [] )
+    
+    if len( h5_files ) == 0:
+      print( "Data files not found!")
+      exit(1)
 
     counter = 0
 
